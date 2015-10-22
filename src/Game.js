@@ -6,6 +6,7 @@ function Game (canvas)
 	this.loader = new Loader(this);
 	this.player = new Player(this);
 	this.world = new World(this);
+	this.obstacleManager = new ObstacleManager(this);
 	this.speedParallax = 0.005;
    	this.cooldownObstacle = 2;
 }
@@ -16,6 +17,7 @@ Game.prototype.init = function()
 	this.scene.debugLayer.show();
 	this.player.load();
 	this.world.load();
+	this.obstacleManager.load();
 	this.loader.loader.load();
 }
 
