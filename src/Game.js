@@ -39,6 +39,7 @@ Game.prototype.loop = function ()
 	var that = this;
 	this.scene.registerBeforeRender(function(){
 		that.player.move();
+		that.player.detectCollisions();
 		that.world.animate();
 	});
 

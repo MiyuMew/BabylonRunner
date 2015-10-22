@@ -15,12 +15,12 @@ Player.prototype.load = function ()
 {
 	var that = this;
 	this.game.loader.add("mesh","player","./assets/player/", "ninja.babylon", function(task){
-		that.mesh = task.loadedSkeletons;
-		task.loadedMeshes.forEach(function(mesh) {
+		that.mesh = task;
+		that.mesh.loadedMeshes.forEach(function(mesh) {
 			mesh.parent = that.playerPosition;
 		});
 
- 		that.mesh.forEach(function(s) {
+ 		that.mesh.loadedSkeletons.forEach(function(s) {
 			that.game.scene.beginAnimation(s, 86, 106, true, 1);
  		});
 	});
@@ -51,7 +51,7 @@ Player.prototype.init = function ()
 	window.addEventListener('keyup',function(event){
 		if (event.keyCode == 90) // jump
 		{
-			that.mesh.forEach(function(s) {
+			that.mesh.loadedSkeletons.forEach(function(s) {
 				that.game.scene.beginAnimation(s, 241, 276, false, 1.5, function(){ that.game.scene.beginAnimation(s, 86, 106, true); });
 	 		});
 	 		that.game.scene.beginDirectAnimation(that.playerPosition, [animationBoxJump], 0,10,false,1);
@@ -59,22 +59,22 @@ Player.prototype.init = function ()
 		else if (event.keyCode == 81) // left
 		{
 			that.onLeft = true;
-			that.positionFinale = that.playerPosition.position.add(new BABYLON.Vector3(-1,0,0));
-			that.mesh.forEach(function(s) {
+			that.positionFinale = that.playerPosition.position.add(new BABYLON.Vector3(-10,0,0));
+			that.mesh.loadedSkeletons.forEach(function(s) {
 				that.game.scene.beginAnimation(s, 178, 208, false, 2, function(){ that.game.scene.beginAnimation(s, 86, 106, true); });
 	 		});
 		}
 		else if (event.keyCode == 68) // right
 		{
 			that.onRight = true;
-			that.positionFinale = that.playerPosition.position.add(new BABYLON.Vector3(1,0,0));
-			that.mesh.forEach(function(s) {
+			that.positionFinale = that.playerPosition.position.add(new BABYLON.Vector3(10,0,0));
+			that.mesh.loadedSkeletons.forEach(function(s) {
 				that.game.scene.beginAnimation(s, 209, 240, false, 1, function(){ that.game.scene.beginAnimation(s, 86, 106, true); });
 	 		});
 		}
 		else if (event.keyCode == 83) // slide
 		{
-			that.mesh.forEach(function(s) {
+			that.mesh.loadedSkeletons.forEach(function(s) {
 				that.game.scene.beginAnimation(s, 277, 307, false, 1, function(){ that.game.scene.beginAnimation(s, 86, 106, true); });
 	 		});
 		}
@@ -87,7 +87,7 @@ Player.prototype.move = function()
 {
 	var that = this;
 	this.game.scene.registerBeforeRender(function(){
-		if (that.positionFinale.x >= -1 && that.positionFinale.x <= 1)
+		if (that.positionFinale.x >= -10 && that.positionFinale.x <= 10)
 		{
 			if (that.onLeft)
 			{
@@ -108,6 +108,22 @@ Player.prototype.move = function()
 					that.playerPosition.position = that.positionFinale;
 					that.onRight = false;
 				}
+			}
+		}
+	});
+}
+
+Player.prototype.detectCollisions = function() 
+{	
+	var that = this;
+	this.mesh.loadedMeshes.forEach(function(mesh) {
+		for (var cptCaillou = 0; cptCaillou < that.game.obstacleManager.obstacles.length; cptCaillou++)
+		{
+			if (mesh.intersectsMesh(that.game.obstacleManager.obstacles[cptCaillou], false)) {
+			 	that.game.obstacleManager.obstacles[cptCaillou].dispose();
+			 	that.game.obstacleManager.obstacles.splice(cptCaillou,1);
+			 	cptCaillou --;
+			 	return;
 			}
 		}
 	});
