@@ -113,13 +113,9 @@ World.prototype.animate = function ()
         this.game.cooldownObstacle -= this.game.engine.getDeltaTime() * 0.001;
     else
     {
-       // var obstacle = new Obstacles(scene, 0);
-       // obstacles.push(obstacle);
-       this.game.cooldownObstacle = 2;
+        this.game.obstacleManager.createObstacle(0);
+        this.game.cooldownObstacle = 2;
     }
 
-    for(var i = 0; i < this.obstacles.length; i++)
-    {
-        // this.obstacles[i].move(scene, engine);
-    }
+    this.game.obstacleManager.move();
 }

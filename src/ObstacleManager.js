@@ -1,10 +1,10 @@
 function ObstacleManager(game)
 {
 	this.game = game;
-	this.mesh;
-	this.materialObstacle;
-	this.textureObstacle;
+	this.materialObstacle = new BABYLON.StandardMaterial("Obstacle", this.game.scene);;
 	this.obstacles = [];
+	this.mesh = null;
+	this.obstacleRef = new BABYLON.Mesh("obstacleRef", this.game.scene);
 }
 
 ObstacleManager.prototype.constructor = ObstacleManager;
@@ -13,26 +13,26 @@ ObstacleManager.prototype.load = function()
 	var that = this;
 
 	this.game.loader.add("mesh", "obstacles", "./assets/world/", "rockObstacle.babylon", function(task){
-		that.mesh  = task;
-	});
+		task.loadedMeshes[0].parent = that.obstacleRef;
+		that.mesh = task.loadedMeshes[0];
+		that.mesh.material = that.materialObstacle;
+		that.mesh.material.diffuseTexture = new BABYLON.Texture("./assets/world/kudaki_iwa.png", that.game.scene);
 
-	this.game.loader.add("texture", "obstacles", "./assets/world/", "kudaki_iwa.png", function(task){
-		that.textureObstacle = task.texture;
+		that.obstacleRef.scaling = new BABYLON.Vector3(10,10,10);
+		that.obstacleRef.position = new BABYLON.Vector3(5000,0,0);
 	});
 }
 ObstacleManager.prototype.createObstacle = function(posX)
 {
-	var obstacle = this.mesh.clone("obstacle");
-	obstacle.position = new BABYLON.Vector3(posX, 0, 40);
-	obstacle.material = this.materialObstacle;
-	obstacle.material.diffuseTexture = this.textureObstacle;
+	var obstacle = this.obstacleRef.clone("obstacle");
+	obstacle.position = new BABYLON.Vector3(posX, 0, 400);
 
 	this.obstacles.push(obstacle);
 }
-ObstacleManager.prototype.move = function(scene, engine)
+ObstacleManager.prototype.move = function()
 {
+	var that = this;
 	this.obstacles.forEach(function(obstacle){
-		obstacle.position.z -= 0.005 * engine.getDeltaTime();
-	})
-	//console.log(this.obstacle.position.z);
+		obstacle.position.z -= 0.05 * that.game.engine.getDeltaTime();
+	});
 }
