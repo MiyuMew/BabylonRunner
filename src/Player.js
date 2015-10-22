@@ -31,7 +31,7 @@ Player.prototype.init = function ()
 	var that = this;
 	this.playerPosition.rotation.x = -Math.PI/2;
 	this.playerPosition.rotation.y = Math.PI;
-	this.playerPosition.position.z = -4;
+	this.playerPosition.position.z = -40;
 
 	var animationBoxJump = new BABYLON.Animation(
 		"jump", 

@@ -36,15 +36,15 @@ World.prototype.load = function ()
 
 World.prototype.init = function ()
 {
-    for(var i = 0; i <= 10; i++)
+    for(var i = 0; i <= 16; i++)
     {
         var fond = new BABYLON.Mesh.CreatePlane("fond", 100, this.game.scene);
         fond.material = this.materialFond;
         fond.material.diffuseTexture = this.textureFond;
-        if (i >= 5)
+        if (i >= 8)
         {
         	fond.position.x = -40;
-        	fond.position.z = (2 + 10*(i-5))*10;
+        	fond.position.z = (2 + 10*(i-8))*10;
        		fond.rotate(BABYLON.Axis.Y, -3*Math.PI/7, BABYLON.Space.WORLD);
         	fond.rotate(BABYLON.Axis.Z, Math.PI/6, BABYLON.Space.WORLD);
     	}
@@ -58,7 +58,7 @@ World.prototype.init = function ()
         this.fonds.push(fond);
     }
 
-    for (var i = 0; i <= 15; i++) 
+    for (var i = 0; i <= 20; i++) 
     {
         var plane = new BABYLON.Mesh.CreatePlane("plane1", 40, this.game.scene);
         plane.material = this.materialPlane;
@@ -95,9 +95,9 @@ World.prototype.animate = function ()
 
         if(this.planes[i].position.z < -80)
         {
-            this.planes[i].position.z = 490;
-            this.wallsG[i].position.z = 490;
-            this.wallsD[i].position.z = 490;
+            this.planes[i].position.z = 758;
+            this.wallsG[i].position.z = 758;
+            this.wallsD[i].position.z = 758;
         }
     }
 
@@ -106,16 +106,27 @@ World.prototype.animate = function ()
         this.fonds[i].position.z -= (this.game.speedParallax/2 * this.game.engine.getDeltaTime())*10;
 
         if(this.fonds[i].position.z < -150)
-            this.fonds[i].position.z = 450;
+            this.fonds[i].position.z = 650;
     }
 
     if(this.game.cooldownObstacle > 0)
         this.game.cooldownObstacle -= this.game.engine.getDeltaTime() * 0.001;
     else
     {
-        this.game.obstacleManager.createObstacle(0);
+        var alea = 10*(Math.floor(Math.random() * 3) - 1);
+        this.game.obstacleManager.createObstacle(alea);
         this.game.cooldownObstacle = 2;
     }
 
+    if(this.game.cooldownCollectible > 0)
+        this.game.cooldownCollectible -= this.game.engine.getDeltaTime() * 0.001;
+    else 
+    {
+        var alea = 10*(Math.floor(Math.random() * 3) - 1);
+        this.game.collectibleManager.createCollectible(alea);
+        this.game.cooldownCollectible = 10;
+    }
+
     this.game.obstacleManager.move();
+    this.game.collectibleManager.move();
 }

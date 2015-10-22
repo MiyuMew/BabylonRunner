@@ -7,8 +7,10 @@ function Game (canvas)
 	this.player = new Player(this);
 	this.world = new World(this);
 	this.obstacleManager = new ObstacleManager(this);
+	this.collectibleManager = new CollectibleManager(this);
 	this.speedParallax = 0.005;
    	this.cooldownObstacle = 2;
+   	this.cooldownCollectible = 4.1;
 }
 Game.prototype.constructor = Game;
 
@@ -18,6 +20,7 @@ Game.prototype.init = function()
 	this.player.load();
 	this.world.load();
 	this.obstacleManager.load();
+	this.collectibleManager.load();
 	this.loader.loader.load();
 }
 

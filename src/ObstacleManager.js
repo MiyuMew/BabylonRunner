@@ -18,14 +18,14 @@ ObstacleManager.prototype.load = function()
 		that.mesh.material = that.materialObstacle;
 		that.mesh.material.diffuseTexture = new BABYLON.Texture("./assets/world/kudaki_iwa.png", that.game.scene);
 
-		that.obstacleRef.scaling = new BABYLON.Vector3(10,10,10);
-		that.obstacleRef.position = new BABYLON.Vector3(5000,0,0);
+		that.obstacleRef.scaling = new BABYLON.Vector3(15,15,15);
+		that.obstacleRef.setEnabled(false);
 	});
 }
 ObstacleManager.prototype.createObstacle = function(posX)
 {
 	var obstacle = this.obstacleRef.clone("obstacle");
-	obstacle.position = new BABYLON.Vector3(posX, 0, 400);
+	obstacle.position = new BABYLON.Vector3(posX, 0, 650);
 
 	this.obstacles.push(obstacle);
 }
