@@ -17,6 +17,23 @@ function World (game)
     this.textureRock;
 }
 World.prototype.constructor = World;
+
+World.prototype.load = function () 
+{
+    var that = this;
+    this.game.loader.add("texture","fond","./assets/world/", "rocks.png", function(task){
+        that.textureFond = task.texture;
+    });
+
+    this.game.loader.add("texture","ground","./assets/world/", "Grass.png", function(task){
+        that.textureGround = task.texture;
+    });
+
+    this.game.loader.add("texture","rock","./assets/world/", "rockWall.png", function(task){
+        that.textureRock = task.texture;
+    });
+}
+
 World.prototype.init = function ()
 {
     for(var i = 0; i <= 10; i++)

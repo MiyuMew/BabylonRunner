@@ -10,6 +10,22 @@ function Player (game)
 	this.positionFinale = BABYLON.Vector3.Zero();
 }
 Player.prototype.constructor = Player;
+
+Player.prototype.load = function ()
+{
+	var that = this;
+	this.game.loader.add("mesh","player","./assets/player/", "ninja.babylon", function(task){
+		that.mesh = task.loadedSkeletons;
+		task.loadedMeshes.forEach(function(mesh) {
+			mesh.parent = that.playerPosition;
+		});
+
+ 		that.mesh.forEach(function(s) {
+			that.game.scene.beginAnimation(s, 86, 106, true, 1);
+ 		});
+	});
+}
+
 Player.prototype.init = function ()
 {
 	var that = this;

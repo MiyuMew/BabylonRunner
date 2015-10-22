@@ -10,33 +10,12 @@ function Game (canvas)
    	this.cooldownObstacle = 2;
 }
 Game.prototype.constructor = Game;
+
 Game.prototype.init = function()
 {
-	var that = this;
 	this.scene.debugLayer.show();
-	this.loader.add("mesh","player","./assets/player/", "ninja.babylon", function(task){
-		that.player.mesh = task.loadedSkeletons;
-		task.loadedMeshes.forEach(function(mesh) {
-			mesh.parent = that.player.playerPosition;
-		});
-
- 		that.player.mesh.forEach(function(s) {
-			that.scene.beginAnimation(s, 86, 106, true, 1);
- 		});
-	});
-
-	this.loader.add("texture","fond","./assets/world/", "rocks.png", function(task){
-		that.world.textureFond = task.texture;
-	});
-
-	this.loader.add("texture","ground","./assets/world/", "Grass.png", function(task){
-		that.world.textureGround = task.texture;
-	});
-
-	this.loader.add("texture","rock","./assets/world/", "rockWall.png", function(task){
-		that.world.textureRock = task.texture;
-	});
-
+	this.player.load();
+	this.world.load();
 	this.loader.loader.load();
 }
 
