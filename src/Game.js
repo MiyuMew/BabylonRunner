@@ -11,6 +11,8 @@ function Game (canvas)
 	this.speedParallax = 0.005;
    	this.cooldownObstacle = 2;
    	this.cooldownCollectible = 4.1;
+   	this.nbPiecesCollectees = 0;
+   	this.nbMetresParcouru = 0;
 }
 Game.prototype.constructor = Game;
 
@@ -50,3 +52,10 @@ Game.prototype.loop = function ()
 		that.scene.render();
 	});
 }
+
+Game.prototype.defeat = function ()
+{
+
+}
+
+

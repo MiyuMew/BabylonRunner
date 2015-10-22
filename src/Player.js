@@ -122,7 +122,42 @@ Player.prototype.detectCollisions = function()
 			if (mesh.intersectsMesh(that.game.obstacleManager.obstacles[cptCaillou], false)) {
 			 	that.game.obstacleManager.obstacles[cptCaillou].dispose();
 			 	that.game.obstacleManager.obstacles.splice(cptCaillou,1);
+			 	if (that.game.nbVies > 0)
+			 		that.game.nbVies --;
+			 	// else
+			 	// 	that.game.defeat();
 			 	cptCaillou --;
+
+				var interval = 30;
+				var duration= 1000;
+				var shake= 8;
+				var vibrateIndex = 0;
+				var selector = $('canvas');
+				var vibrate = function(){
+			    $(selector).stop(true,false)
+			    .css({position: 'relative', 
+			    left: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px', 
+			    top: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px'});
+			    }
+			    var stopVibration = function() {
+			    clearInterval(vibrateIndex);
+			    $(selector).stop(true,false)
+			        .css({position: 'static', left: '0px', top: '0px'});
+			    };  
+			  	vibrateIndex = setInterval(vibrate, interval);
+			  	setTimeout(stopVibration, duration); 
+
+			 	return;
+			}
+		}
+
+		for (var cptCollectible = 0; cptCollectible < that.game.collectibleManager.collectibles.length; cptCollectible++)
+		{
+			if (mesh.intersectsMesh(that.game.collectibleManager.collectibles[cptCollectible], false)) {
+			 	that.game.collectibleManager.collectibles[cptCollectible].dispose();
+			 	that.game.collectibleManager.collectibles.splice(cptCollectible,1);
+			 	that.game.nbPiecesCollectees ++;
+			 	cptCollectible --;
 			 	return;
 			}
 		}
