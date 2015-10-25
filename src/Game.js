@@ -11,14 +11,12 @@ function Game (canvas)
 	this.speedParallax = 0.005;
    	this.cooldownObstacle = 2;
    	this.cooldownCollectible = 4.1;
-   	this.nbPiecesCollectees = 0;
-   	this.nbMetresParcouru = 0;
 }
 Game.prototype.constructor = Game;
 
 Game.prototype.init = function()
 {
-	this.scene.debugLayer.show();
+	// this.scene.debugLayer.show();
 	this.player.load();
 	this.world.load();
 	this.obstacleManager.load();
@@ -55,7 +53,12 @@ Game.prototype.loop = function ()
 
 Game.prototype.defeat = function ()
 {
-
+	this.scene.dispose();
+	this.engine.dispose();
+	$("#ingame").css("display","none");
+	$("#menu").css("display","block");
+	$("#menu > div").css("display","none");
+	$("#endingScreen").css("display","block");
 }
 
 
