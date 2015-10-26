@@ -13,6 +13,7 @@ ObstacleManager.prototype.load = function()
 {
 	var that = this;
 
+	// Ajout au loader du caillou
 	this.game.loader.add("mesh", "obstacles", "./assets/world/", "rockObstacle.babylon", function(task){
 		task.loadedMeshes[0].parent = that.obstacleRef;
 		that.mesh = task.loadedMeshes[0];
@@ -20,11 +21,12 @@ ObstacleManager.prototype.load = function()
 		that.mesh.material.diffuseTexture = new BABYLON.Texture("./assets/world/kudaki_iwa.png", that.game.scene);
 
 		that.obstacleRef.scaling = new BABYLON.Vector3(15,15,15);
-		that.obstacleRef.setEnabled(false);
+		that.obstacleRef.setEnabled(false);		// Cache l'élément
 	});
 }
 ObstacleManager.prototype.createObstacle = function(posX)
 {
+	// Création d'un obstacle
 	var obstacle = this.obstacleRef.clone("obstacle");
 	obstacle.position = new BABYLON.Vector3(posX, 0, 650);
 
@@ -32,6 +34,7 @@ ObstacleManager.prototype.createObstacle = function(posX)
 }
 ObstacleManager.prototype.move = function(game)
 {
+	// Défilement des obstacles
 	var that = this;
 	this.obstacles.forEach(function(obstacle){
 		obstacle.position.z -= that.game.speedParallax * that.game.engine.getDeltaTime();

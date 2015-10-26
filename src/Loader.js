@@ -4,6 +4,7 @@ function Loader (game)
 	this.game = game;
 	this.loader = new BABYLON.AssetsManager(this.game.scene);
 
+	// Lorsque le loader est fini on crée la scène
 	this.loader.onFinish = function (tasks) {
 		that.game.createScene();
 	}

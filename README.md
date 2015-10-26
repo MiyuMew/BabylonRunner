@@ -1,5 +1,5 @@
 # BabylonRunner
-Runner made by Camille &amp; Me in BabylonJS for ISART Digital school class
+Runner made by Camille &amp; Chloé in BabylonJS for ISART Digital school class
 
 ## Concept
 
@@ -27,8 +27,12 @@ Il suffit de passer sur les pièces pour les recolter.
 
 Passer sur les obstacles vous fait perdre de la vie.
 
+La vitesse du jeu s'accélère au fur et à mesure que vous récoltez des coins.
+
 ## Bugs connus et non-corrigés
 
 Nous n'avons pas eu le temps de mettre en place l'enregistrement des scores.
 
 Il n'y a aucun obstacle jouant sur le saut/la glissade du personnage par manque de temps également.
+
+Nous n'avons pas eu le temps de faire en sorte que les lignées de coins ne soient pas interrompu par des obstacles.

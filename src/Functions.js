@@ -1,3 +1,4 @@
+// Tremblement du canvas
 function shakeScreen () 
 {
 	var interval = 10;

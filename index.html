@@ -18,6 +18,7 @@
 	<body>
 		<div id="game">
 			<div id="menu">
+				<!-- ECRAN PRINCIPAL DU MENU -->
 				<div id="homeScreen">
 					<div class="content">
 						<h1> Menu </h1>
@@ -26,6 +27,7 @@
 						<button class="btnCredits"> Credits </button>
 					</div>
 				</div>
+				<!-- ECRAN DES REGLES -->
 				<div id="rulesScreen" style="display:none;">
 					<div class="content">
 						<h1> Rules </h1>
@@ -35,6 +37,7 @@
 						<button class="btnMenu"> Back to menu </button>
 					</div>
 				</div>
+				<!-- ECRAN DES CREDITS -->
 				<div id="creditsScreen" style="display:none;">
 					<div class="content">
 						<h1> Credits </h1>
@@ -52,6 +55,7 @@
 						<button class="btnMenu"> Back to menu </button>
 					</div>
 				</div>
+				<!-- ECRAN DE DEFAITE -->
 				<div id="endingScreen" style="display:none;">
 					<div class="content">
 						<h1>  Defeat </h1>
@@ -62,9 +66,11 @@
 				</div>
 			</div>
 			<div id="ingame" style="display:none;">
+				<!-- JEU -->
 				<div id="canvasContainer">
 					<canvas id="renderCanvas"></canvas>
 				</div>
+				<!-- HUD -->
 				<div id="hud">
 					<h1 id="nbVies">3</h1>
 					<img src="assets/hud/coeur.png">

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+	//Actions sur les boutons du menu
 	$(".btnPlay").on("click", function () {
 		$("#menu").css("display","none");
 		$("#ingame").css("display","block");
