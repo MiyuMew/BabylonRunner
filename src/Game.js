@@ -16,7 +16,7 @@ Game.prototype.constructor = Game;
 
 Game.prototype.init = function()
 {
-	this.scene.debugLayer.show();
+	// this.scene.debugLayer.show();
 	this.player.load();
 	this.world.load();
 	this.obstacleManager.load();
@@ -50,3 +50,15 @@ Game.prototype.loop = function ()
 		that.scene.render();
 	});
 }
+
+Game.prototype.defeat = function ()
+{
+	this.scene.dispose();
+	this.engine.dispose();
+	$("#ingame").css("display","none");
+	$("#menu").css("display","block");
+	$("#menu > div").css("display","none");
+	$("#endingScreen").css("display","block");
+}
+
+

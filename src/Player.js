@@ -7,6 +7,8 @@ function Player (game)
 	this.onRight = false;
 	this.onStrike = false;
 	this.onJump = false;
+	this.nbVies = 3;
+	this.nbPiecesCollectees = 0;
 	this.positionFinale = BABYLON.Vector3.Zero();
 }
 Player.prototype.constructor = Player;
@@ -29,6 +31,8 @@ Player.prototype.load = function ()
 Player.prototype.init = function ()
 {
 	var that = this;
+	$("#nbVies").text(this.nbVies);
+	$(".nbCoins").text(this.nbPiecesCollectees);
 	this.playerPosition.rotation.x = -Math.PI/2;
 	this.playerPosition.rotation.y = Math.PI;
 	this.playerPosition.position.z = -40;
@@ -122,7 +126,25 @@ Player.prototype.detectCollisions = function()
 			if (mesh.intersectsMesh(that.game.obstacleManager.obstacles[cptCaillou], false)) {
 			 	that.game.obstacleManager.obstacles[cptCaillou].dispose();
 			 	that.game.obstacleManager.obstacles.splice(cptCaillou,1);
+			 	if (that.nbVies > 0)
+			 		that.nbVies --;
+			 	else
+			 		that.game.defeat();
+			 	$("#nbVies").text(that.nbVies);
 			 	cptCaillou --;
+			 	shakeScreen();
+			 	return;
+			}
+		}
+
+		for (var cptCollectible = 0; cptCollectible < that.game.collectibleManager.collectibles.length; cptCollectible++)
+		{
+			if (mesh.intersectsMesh(that.game.collectibleManager.collectibles[cptCollectible], false)) {
+			 	that.game.collectibleManager.collectibles[cptCollectible].dispose();
+			 	that.game.collectibleManager.collectibles.splice(cptCollectible,1);
+			 	that.nbPiecesCollectees ++;
+			 	$(".nbCoins").text(that.nbPiecesCollectees);
+			 	cptCollectible --;
 			 	return;
 			}
 		}

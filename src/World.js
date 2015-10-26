@@ -95,9 +95,16 @@ World.prototype.animate = function ()
 
         if(this.planes[i].position.z < -80)
         {
-            this.planes[i].position.z = 758;
-            this.wallsG[i].position.z = 758;
-            this.wallsD[i].position.z = 758;
+            var newPosition = this.planes[this.planes.length-1].position.z + 40
+            this.planes[i].position.z = newPosition;
+            this.wallsG[i].position.z = newPosition;
+            this.wallsD[i].position.z = newPosition;
+            this.planes.push(this.planes[i]);
+            this.wallsG.push(this.wallsG[i]);
+            this.wallsD.push(this.wallsD[i]);
+            this.planes.splice(i,1);
+            this.wallsG.splice(i,1);
+            this.wallsD.splice(i,1);
         }
     }
 
@@ -107,7 +114,7 @@ World.prototype.animate = function ()
 
         if(this.fonds[i].position.z < -150)
             this.fonds[i].position.z = 650;
-    }
+    }      
 
     if(this.game.cooldownObstacle <= 0)
     {

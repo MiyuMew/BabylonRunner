@@ -1,17 +1,77 @@
-<html>
+﻿<html>
 	<head>
 		<h1> Babylon JS - Our Runner </h1>
 		<script type="text/javascript" src="libs/babylon.2.2.js"></script>
 		<script type="text/javascript" src="libs/oimo.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script type="text/javascript" src="src/Init.js"></script>
 		<script type="text/javascript" src="src/Game.js"></script>
 		<script type="text/javascript" src="src/World.js"></script>
 		<script type="text/javascript" src="src/Loader.js"></script>
+		<script type="text/javascript" src="src/Functions.js"></script>
 		<script type="text/javascript" src="src/Player.js"></script>
 		<script type="text/javascript" src="src/ObstacleManager.js"></script>
 		<script type="text/javascript" src="src/CollectibleManager.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<canvas id="renderCanvas" style="width:90%;height:90%;"></canvas>
+		<div id="game">
+			<div id="menu">
+				<div id="homeScreen">
+					<div class="content">
+						<h1> Menu </h1>
+						<button class="btnPlay"> Play </button><br/>
+						<button class="btnRules"> Rules </button><br/>
+						<button class="btnCredits"> Credits </button>
+					</div>
+				</div>
+				<div id="rulesScreen" style="display:none;">
+					<div class="content">
+						<h1> Rules </h1>
+						<h3><span>Collect as much as possible coins but be careful with rocks !</span></h3>
+						<h3><span>You have only 3 lives !</span></h3>
+						<h3><span>Use "Q" and "D" to move left or right and "Z" or "S" to jump or slide.</span></h3>
+						<button class="btnMenu"> Back to menu </button>
+					</div>
+				</div>
+				<div id="creditsScreen" style="display:none;">
+					<div class="content">
+						<h1> Credits </h1>
+						<h2><span> Programmers </span></h2>
+						<h3><span> Camille FERANDOU </span></h3>
+						<h3><span> Chloe BERTHEVILLE </span></h3>
+
+						<h2><span> Graphisms </span></h2>
+						<h3><span> Internet </span></h3>
+
+						<h2><span> Big thanks to our teacher Julian CHEN </span></h2>
+
+						<h2><span> Additional thanks to our school ISART Digital </span></h2>
+						<img src="assets/logo.png" width="200"><br/><br/>
+						<button class="btnMenu"> Back to menu </button>
+					</div>
+				</div>
+				<div id="endingScreen" style="display:none;">
+					<div class="content">
+						<h1>  Defeat </h1>
+						<h2><span> But you have collected <span class="nbCoins"></span> coins !<span></h2>
+						<button class="btnMenu"> Back to menu </button><br/>
+						<button class="btnPlay"> Retry </button>
+					</div>
+				</div>
+			</div>
+			<div id="ingame" style="display:none;">
+				<div id="canvasContainer">
+					<canvas id="renderCanvas"></canvas>
+				</div>
+				<div id="hud">
+					<h1 id="nbVies">3</h1>
+					<img src="assets/hud/coeur.png">
+					<h1 class="nbCoins">0</h1>
+					<img src="assets/hud/coin.png">
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

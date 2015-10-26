@@ -1,0 +1,67 @@
+#game {
+	width:100%;
+	height:90%;
+	border: 1px solid black;
+}
+
+#menu {
+	width: 100%;
+	height: 90%;
+	background-image: url("../assets/menu.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#canvasContainer {
+	width: 80%;
+	display: inline-block;
+}
+
+#renderCanvas {
+	width: 100%;
+	height: 100%
+}
+
+#hud {
+	display: inline-block;
+	position: absolute;
+	width: 20%;
+	text-align: center;
+}
+
+#hud img {
+	width: 30%;
+	height: auto;
+}
+
+button {
+	width: 300px;
+	height: 80px;
+	border: 1px solid black;
+	background: #edb680; /* Old browsers */
+	background: -moz-linear-gradient(top,  #edb680 0%, #fc8a32 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#edb680), color-stop(100%,#fc8a32)); /* Chrome,Safari4+ */
+	background: -o-linear-gradient(top,  #edb680 0%,#fc8a32 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #edb680 0%,#fc8a32 100%); /* IE10+ */
+	margin-bottom: 10px;
+	font-size: 25px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.content {
+	margin-left: 10%;
+}
+
+.content h1 {
+	font-size: 80px;
+}
+
+.content span {
+	background-color: #fff;
+}
+
+.btnMenu {
+	margin-top: 30px;
+}
