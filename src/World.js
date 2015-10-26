@@ -87,11 +87,20 @@ World.prototype.init = function ()
 
 World.prototype.animate = function ()
 {
+    if(this.game.speedParallax < 0.2)
+        this.game.speedParallax += 0.00002;
+
+    if(this.game.obstacleManager.intervalle < 1.7)
+        this.game.obstacleManager.intervalle += 0.00023;
+
+    if(this.game.collectibleManager.intervalle < 5)
+        this.game.collectibleManager.intervalle += 0.00067; 
+
 	for(var i = 0; i < this.planes.length; i++)
     {
-        this.planes[i].position.z -= this.game.speedParallax * this.game.engine.getDeltaTime() * 10;
-        this.wallsG[i].position.z -= this.game.speedParallax * this.game.engine.getDeltaTime() * 10;
-        this.wallsD[i].position.z -= this.game.speedParallax * this.game.engine.getDeltaTime() * 10;
+        this.planes[i].position.z -= this.game.speedParallax * this.game.engine.getDeltaTime();
+        this.wallsG[i].position.z -= this.game.speedParallax * this.game.engine.getDeltaTime();
+        this.wallsD[i].position.z -= this.game.speedParallax * this.game.engine.getDeltaTime();
 
         if(this.planes[i].position.z < -80)
         {
@@ -110,7 +119,7 @@ World.prototype.animate = function ()
 
     for(var i = 0; i < this.fonds.length; i++)
     {
-        this.fonds[i].position.z -= (this.game.speedParallax/2 * this.game.engine.getDeltaTime())*10;
+        this.fonds[i].position.z -= (this.game.speedParallax/2 * this.game.engine.getDeltaTime());
 
         if(this.fonds[i].position.z < -150)
             this.fonds[i].position.z = 650;
@@ -118,20 +127,24 @@ World.prototype.animate = function ()
 
     if(this.game.cooldownObstacle <= 0)
     {
-        var alea = 10*(Math.floor(Math.random() * 3) - 1);
-        this.game.obstacleManager.createObstacle(alea);
-        this.game.cooldownObstacle = 2;
+        var aleaNb = Math.floor(Math.random()+2);
+        for(var i = 0; i < aleaNb; i++)
+        {
+            var alea = 10*(Math.floor(Math.random() * 3) - 1);
+            this.game.obstacleManager.createObstacle(alea);
+        }
+        this.game.cooldownObstacle = 2 - this.game.obstacleManager.intervalle;
     }
     else if (this.game.cooldownCollectible <= 0)
     {
         var alea = 10*(Math.floor(Math.random() * 3) - 1);
         this.game.collectibleManager.createCollectible(alea);
-        this.game.cooldownCollectible = 10;
+        this.game.cooldownCollectible = 10 - this.game.collectibleManager.intervalle;
     }  
 
     this.game.cooldownCollectible -= this.game.engine.getDeltaTime() * 0.001;
     this.game.cooldownObstacle -= this.game.engine.getDeltaTime() * 0.001;
 
-    this.game.obstacleManager.move();
-    this.game.collectibleManager.move();
+    this.game.obstacleManager.move(game);
+    this.game.collectibleManager.move(game);
 }

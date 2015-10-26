@@ -1,6 +1,7 @@
 function CollectibleManager(game)
 {
 	this.game = game;
+	this.intervalle = 0;
 	this.materialCollectible = new BABYLON.StandardMaterial("Collectible", this.game.scene);;
 	this.collectibles = [];
 	this.mesh = null;
@@ -29,16 +30,15 @@ CollectibleManager.prototype.createCollectible = function(posX)
 	{
 		var collectible = this.collectibleRef.clone("collectible");
 		collectible.position = new BABYLON.Vector3(posX, 0, 650 + i * 25);
-		console.log(collectible.position);
 		this.collectibles.push(collectible);
 	}
 
 	this.coinsCreating = false;
 }
-CollectibleManager.prototype.move = function()
+CollectibleManager.prototype.move = function(game)
 {
 	var that = this;
 	this.collectibles.forEach(function(collectible){
-		collectible.position.z -= 0.05 * that.game.engine.getDeltaTime();
+		collectible.position.z -= that.game.speedParallax * that.game.engine.getDeltaTime();
 	});
 }

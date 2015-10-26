@@ -8,7 +8,7 @@ function Game (canvas)
 	this.world = new World(this);
 	this.obstacleManager = new ObstacleManager(this);
 	this.collectibleManager = new CollectibleManager(this);
-	this.speedParallax = 0.005;
+	this.speedParallax = 0.05;
    	this.cooldownObstacle = 2;
    	this.cooldownCollectible = 4.1;
 }

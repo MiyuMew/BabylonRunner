@@ -1,6 +1,7 @@
 function ObstacleManager(game)
 {
 	this.game = game;
+	this.intervalle = 0;
 	this.materialObstacle = new BABYLON.StandardMaterial("Obstacle", this.game.scene);;
 	this.obstacles = [];
 	this.mesh = null;
@@ -29,10 +30,10 @@ ObstacleManager.prototype.createObstacle = function(posX)
 
 	this.obstacles.push(obstacle);
 }
-ObstacleManager.prototype.move = function()
+ObstacleManager.prototype.move = function(game)
 {
 	var that = this;
 	this.obstacles.forEach(function(obstacle){
-		obstacle.position.z -= 0.05 * that.game.engine.getDeltaTime();
+		obstacle.position.z -= that.game.speedParallax * that.game.engine.getDeltaTime();
 	});
 }
