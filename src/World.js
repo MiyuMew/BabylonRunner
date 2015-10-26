@@ -109,23 +109,21 @@ World.prototype.animate = function ()
             this.fonds[i].position.z = 650;
     }
 
-    if(this.game.cooldownObstacle > 0)
-        this.game.cooldownObstacle -= this.game.engine.getDeltaTime() * 0.001;
-    else
+    if(this.game.cooldownObstacle <= 0)
     {
         var alea = 10*(Math.floor(Math.random() * 3) - 1);
         this.game.obstacleManager.createObstacle(alea);
         this.game.cooldownObstacle = 2;
     }
-
-    if(this.game.cooldownCollectible > 0)
-        this.game.cooldownCollectible -= this.game.engine.getDeltaTime() * 0.001;
-    else 
+    else if (this.game.cooldownCollectible <= 0)
     {
         var alea = 10*(Math.floor(Math.random() * 3) - 1);
         this.game.collectibleManager.createCollectible(alea);
         this.game.cooldownCollectible = 10;
-    }
+    }  
+
+    this.game.cooldownCollectible -= this.game.engine.getDeltaTime() * 0.001;
+    this.game.cooldownObstacle -= this.game.engine.getDeltaTime() * 0.001;
 
     this.game.obstacleManager.move();
     this.game.collectibleManager.move();
