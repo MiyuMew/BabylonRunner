@@ -36,3 +36,5 @@ Nous n'avons pas eu le temps de mettre en place l'enregistrement des scores.
 Il n'y a aucun obstacle jouant sur le saut/la glissade du personnage par manque de temps également.
 
 Nous n'avons pas eu le temps de faire en sorte que les lignées de coins ne soient pas interrompu par des obstacles.
+
+Nous aurions aimé afficher un compteur de la distance parcourue en plus des coins collectés.
